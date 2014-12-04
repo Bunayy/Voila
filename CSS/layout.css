@@ -24,6 +24,12 @@ header
     padding-bottom: 0.2vh;
 }
 
+h1
+{
+    color: red;
+    font-family: 'Courgette', cursive;
+}
+
 #login_div
 {
     background-color: #2E8B57;

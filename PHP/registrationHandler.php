@@ -18,12 +18,12 @@
         if ($nameFree)
         {
             $manager->newUser($name, $password);
-            echo "<p>Sie haben sich erfolgreich mit dem Namen '$name' registriert</p>";
+            header("Location: ../succesfulRegisteredPage.html");
         }
 
         else 
         {
-            echo "<p>Der User-Name ist bereits vergeben!</p>";
+            header("Location: ../login.html");
         }
     }
     

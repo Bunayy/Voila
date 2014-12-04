@@ -12,9 +12,8 @@ and open the template in the editor.
 
         <link href="CSS/layout.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="JS/jsFunctions.js"></script>
-        <script type="text/javascript" src="JS/registrationNameCheck.js"></script>
     </head>
-    <body>
+    <body onload="forwardToLogin()">
         <div id="container">
             <header>
                 <h1>Voila</h1>
@@ -24,14 +23,7 @@ and open the template in the editor.
             </nav>
 
             <div id="login_div">
-                <form>
-                    Username: <input type="text" id="userInput" name="username" oninput="checkForAvailability(this.value)"/>
-                    Password: <input type="password" name="password"/>
-                    <input value="Anmelden" type="submit" formaction="PHP/loginHandler.php" formmethod="post"/>
-                    <input value="Registrieren" id="registerButton" type="submit" formaction="PHP/registrationHandler.php" formmethod="post"/>
-                </form>
-                <br />
-                <span id="availabilityInfo"></span>
+                <span id="availabilityInfo">Sie haben sich erfolgreich registriert und werden in wenigen Sekunden auf die Startseite weitergeleitet.</span>
             </div>
 
 

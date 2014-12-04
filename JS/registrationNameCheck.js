@@ -1,10 +1,13 @@
+window.addEventListener("beforeunload", storeName, false);
+window.addEventListener("load", restoreName, false);
 var xmlhttp = initXmlHttpRequestObj();
 
-function checkForAvailability(str){
+function checkForAvailability(str)
+{
     
     if(str.length == 0)
     {
-        document.getElementById("availabilityInfo").innerHTML = "";
+        $("availabilityInfo").innerHTML = "";
         return;
     }
     
@@ -19,12 +22,12 @@ function responseHandler()
 {
     if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
     {
-        var inf = document.getElementById("availabilityInfo");
+        var inf = $("availabilityInfo");
         inf.innerHTML = xmlhttp.responseText;
         
         if(xmlhttp.responseText != "")
-            document.getElementById("registerButton").setAttribute("disabled", "disabled");
+            $("registerButton").setAttribute("disabled", "disabled");
         else
-            document.getElementById("registerButton").removeAttribute("disabled");
+            $("registerButton").removeAttribute("disabled");
     }
 }

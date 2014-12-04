@@ -14,6 +14,7 @@ body
     margin: 0 auto;
     padding: 0;
     border: outset;
+    overflow: scroll;
 }
 
 header
@@ -34,10 +35,20 @@ header
     color: #FFFFFF;
 }
 
-#lectureList_div
+#content_div
 {
-    margin: auto;
     text-align: justify;
-    padding: 20vh 1vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
 }
 
+#availabilityInfo
+{
+    margin-top: 0.4vh;
+    color: #DDDDDD;
+}
+
+::-webkit-scrollbar
+{ 
+    display: none; 
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+
+        <link href="CSS/layout.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="JS/jsFunctions.js"></script>
+        <script type="text/javascript" src="JS/registrationNameCheck.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <header>
+                <h1>Voila</h1>
+            </header>
+
+            <nav>
+            </nav>
+
+            <div id="login_div">
+                <form>
+                    Username: <input type="text" name="username" onkeyup="checkForAvailability(this.value)"/>
+                    Password: <input type="password" name="password"/>
+                    <input value="Anmelden" type="submit" formaction="PHP/loginHandler.php" formmethod="post"/>
+                    <input value="Registrieren" id="registerButton" type="submit" formaction="PHP/registrationHandler.php" formmethod="post"/>
+                    <span id="availabilityInfo"></span>
+                </form>
+            </div>
+
+
+
+            <div id="lectureList_div">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec bibendum urna. Proin et placerat felis. Duis aliquam sapien euismod augue
+                    ullamcorper commodo sed vel orci. Quisque elit purus, placerat at aliquet at, tempus et risus. Phasellus turpis eros, ultrices ac facilisis
+                    mattis, efficitur pellentesque ligula. Etiam nunc lectus, finibus at leo non, lacinia consequat felis. Sed quis auctor orci. Donec interdum
+                    accumsan turpis, ac faucibus purus ornare sed. Sed egestas pulvinar quam gravida placerat. Proin semper massa diam. In blandit felis id lobortis
+                    mattis. Vestibulum convallis lorem mi, vel imperdiet mi accumsan vitae. Donec magna nisi, placerat nec nulla eget, scelerisque pretium risus.
+                    Donec eget pellentesque velit. Etiam ut velit in neque gravida consectetur et id quam. In hac habitasse platea dictumst. Fusce gravida sagittis egestas.
+                    Cras eleifend felis at erat suscipit, venenatis sagittis eros pellentesque. Aenean dapibus quam orci, ut blandit nisl egestas in. Nam in scelerisque urna,
+                    et gravida purus. Fusce pharetra augue quis libero varius mattis. Proin magna nunc, dictum sed ligula quis, dapibus vestibulum odio. Integer imperdiet
+                    turpis nulla, vitae ultricies lacus facilisis ac. Curabitur et sagittis ante. Curabitur ultrices, metus sollicitudin volutpat faucibus, dui magna
+                    tempor nisl, vitae commodo felis leo sit amet lorem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed
+                    lobortis massa odio, ut efficitur leo rutrum nec. Suspendisse potenti. Etiam in consequat metus. Maecenas at lectus elit. Donec a mauris turpis.
+                    Aenean ultricies sem et massa efficitur dignissim. Etiam sit amet venenatis augue, sed condimentum magna. Maecenas facilisis vestibulum justo,
+                    eget luctus quam sagittis in. Phasellus rutrum nisi nec velit varius, vestibulum suscipit ex eleifend. Etiam eget metus sollicitudin, eleifend
+                    libero vitae, ultricies arcu. Suspendisse potenti. Duis pretium fringilla enim id aliquet. Phasellus scelerisque metus eget tempus facilisis.
+                    Nam eu purus a nisl sollicitudin tristique a quis ex. Cras aliquet ex vitae convallis accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit. Curabitur ipsum tellus, rutrum quis placerat a, scelerisque et erat. Donec eget lorem ut urna laoreet egestas consectetur at libero. Ut quis
+                    massa interdum, sagittis ante sed, laoreet nisi. Donec rhoncus aliquam nulla gravida pulvinar. Etiam consectetur pretium arcu, sit amet interdum metus
+                    mollis quis. Phasellus velit neque, suscipit vel pretium ac, euismod vel ligula. Praesent laoreet libero ac nisl facilisis, at tempor eros maximus.
+                    Mauris commodo turpis elit. Nam vehicula lobortis ligula. Etiam ut metus eget sapien pulvinar lobortis. Vestibulum id metus nec massa imperdiet feugiat
+                    eu nec est. Etiam quis libero vitae erat ultricies pretium.
+                </p>
+            </div>
+
+            <footer></footer>
+        </div>
+    </body>
+</html>

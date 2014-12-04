@@ -1,0 +1,43 @@
+body 
+{
+    width: 80vw;
+    background-color: #C0C0C0;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#container
+{
+    background-color: #DDDDDD;
+    width: 70vw;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 0;
+    border: outset;
+}
+
+header
+{
+    text-align: center;
+    padding-top: 1vh;
+    padding-bottom: 0.2vh;
+}
+
+#login_div
+{
+    background-color: #2E8B57;
+    text-align: center;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#lectureList_div
+{
+    margin: auto;
+    text-align: justify;
+    padding: 20vh 1vw;
+}
+

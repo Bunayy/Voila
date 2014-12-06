@@ -28,6 +28,8 @@ h1
 {
     color: red;
     font-family: 'Courgette', cursive;
+    font-size: 5em;
+    margin: 0;
 }
 
 #login_div
@@ -41,8 +43,98 @@ h1
     color: #FFFFFF;
 }
 
+nav
+{
+    width: 52%;
+    background-color: #2E8B57;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    float: left;
+    padding-left: 24%;
+    padding-right: 24%;
+}
+
+nav ul
+{
+    float: left;
+    list-style-type: none;
+    width: 25%;
+    min-width: 137px;
+    margin: 0;
+    padding-left: 0;
+}
+
+nav h2
+{
+    font-size: 1.2em;
+    text-align: center;
+    color: #2E8B57;
+    border: 1px solid #2E8B57;
+    background-color: #C0C0C0;
+    margin: 0;
+}
+
+nav a
+{ 
+    line-height: 2.5;
+    font-size: 0.8em;
+    text-decoration: none;
+    display: block;
+    border: 1px solid #2E8B57;
+    text-align: center;
+    background-color: #C0C0C0;
+    color: #2E8B57;
+}
+
+nav a:hover
+{
+    background-color: bisque;
+    color: #000000;
+}
+
+nav li
+{
+    position: relative;
+}
+
+nav ul ul
+{
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+}
+
+nav ul li:hover h2
+{
+    background-color: bisque;
+    color: #000000;
+}
+
+nav ul li:hover ul
+{
+    display: block;
+}
+
+.direct
+{
+    font-size: 1.2em;
+    text-align: center;
+    color: #2E8B57;
+    border: 1px solid #2E8B57;
+    background-color: #C0C0C0; 
+}
+
+.direct:hover
+{
+    background-color: bisque;
+    color: #000000;
+}
+
 #content_div
 {
+    margin-top: 7vh;
     text-align: justify;
     padding-left: 1vw;
     padding-right: 1vw;

@@ -2,6 +2,11 @@ window.addEventListener("beforeunload", storeName, false);
 window.addEventListener("load", restoreName, false);
 var xmlhttp = initXmlHttpRequestObj();
 
+function initLoginHTML()
+{
+    
+}
+
 function checkForAvailability(str)
 {
     

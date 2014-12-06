@@ -24,7 +24,8 @@ function storeName()
 //Guckt, ob ein Username im Localstorage angelegt ist und lädt diesen
 function restoreName()
 {
-    $("userInput").value = sessionStorage.username;
+    if(sessionStorage.username != undefined)
+        $("userInput").value = sessionStorage.username;
 }
 
 //Funktion zur Weiterleitung auf die Login-Seite

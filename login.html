@@ -15,7 +15,7 @@ and open the template in the editor.
         <script type="text/javascript" src="JS/jsFunctions.js"></script>
         <script type="text/javascript" src="JS/loginRegistration.js"></script>
     </head>
-    <body>
+    <body onload="initLoginHTML()">
         <div id="container">
             <header>
                 <h1>Voila</h1>
@@ -25,8 +25,8 @@ and open the template in the editor.
                 <form>
                     Username: <input type="text" id="userInput" name="username" oninput="checkForAvailability(this.value)" required="required"/>
                     Password: <input type="password" name="password" required="required"/>
-                    <input value="Anmelden" type="submit" formaction="PHP/loginHandler.php" formmethod="post"/>
-                    <input value="Registrieren" id="registerButton" type="submit" formaction="PHP/registrationHandler.php" formmethod="post"/>
+                    <input type="submit" value="Anmelden" formmethod="post" formaction="PHP/loginHandler.php"/>
+                    <input type="submit" value="Registrieren" id="registerButton" formaction="PHP/registrationHandler.php" formmethod="post"/>
                 </form>
                 <br />
                 <span id="availabilityInfo"></span>

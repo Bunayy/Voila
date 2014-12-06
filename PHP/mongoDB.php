@@ -38,7 +38,7 @@ class DBManager
     function login($name, $pw)
     {
         $pWord = DBManager::$users->findOne(array('username' => $name), array('password'));
-        if ($pWord === $pw)
+        if ($pWord['password'] == $pw)
         {
             return true;
         }

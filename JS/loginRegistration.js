@@ -1,10 +1,32 @@
 window.addEventListener("beforeunload", storeName, false);
-window.addEventListener("load", restoreName, false);
+//window.addEventListener("load", forwardAuthor(), false);
 var xmlhttp = initXmlHttpRequestObj();
 
 function initLoginHTML()
 {
+    restoreName();
     
+    if ($("userInput").value !== "")
+    {
+        checkForAvailability($("userInput").value);
+        
+    }
+}
+
+function forwardAuthor()
+{
+    
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+    }
+    return "";
 }
 
 function checkForAvailability(str)

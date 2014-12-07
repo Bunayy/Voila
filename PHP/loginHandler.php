@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include './phpFunctions.php';
 include './mongoDB.php';
 
@@ -16,6 +18,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     
     if($verified)
     {
+        $_SESSION["username"] = $name;
         header('Location: ../authorIndex.html');
     }
     else

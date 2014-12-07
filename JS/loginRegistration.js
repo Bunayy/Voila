@@ -1,32 +1,35 @@
 window.addEventListener("beforeunload", storeName, false);
-//window.addEventListener("load", forwardAuthor(), false);
+window.addEventListener("load", initLoginHTML()(), false);
 var xmlhttp = initXmlHttpRequestObj();
 
 function initLoginHTML()
 {
-    restoreName();
-    
-    if ($("userInput").value !== "")
+    if(checkCookie("PHPSESSID"))
     {
-        checkForAvailability($("userInput").value);
-        
+        window.location = "/Voila/authorIndex.html";
+    }
+    else
+    {
+        restoreName();
+
+        if ($("userInput").value !== "")
+        {
+            checkForAvailability($("userInput").value);       
+        }
     }
 }
 
-function forwardAuthor()
-{
-    
-}
-
-function getCookie(cname) {
+function checkCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+        while (c.charAt(0)==' ')
+            c = c.substring(1);
+        if (c.indexOf(name) == 0)
+            return true;
     }
-    return "";
+    return false;
 }
 
 function checkForAvailability(str)

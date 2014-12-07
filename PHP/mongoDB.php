@@ -50,7 +50,7 @@ class DBManager
     
     function newUser($user, $password)
     {
-        $doc = array("username" => $user, "password" => $password);
+        $doc = array("username" => $user, "password" => $password, "albums" => array());
         DBManager::$users->insert($doc);
     }
 
@@ -59,7 +59,24 @@ class DBManager
         $userlist = DBManager::$users->find();
         return $userlist;
     }
-
+    
+    function getAlbumListOfOneAuthor($name)
+    {
+        $doc = DBManager::$users->findOne(array('username' => $name), array('albums'));
+        $list = $doc['albums'];
+        return $list;
+    }
+    
+    function getCompleteAlbumList()
+    {
+        
+    }
+    
+    function getAlbum($albumName)
+    {
+        
+    }
+    
     function deleteUser($data)
     {
         DBManager::$users->remove(array('username' => $data), array("justOne" => true));

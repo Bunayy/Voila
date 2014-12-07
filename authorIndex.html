@@ -13,6 +13,8 @@ and open the template in the editor.
         <link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
         <link href="CSS/layout.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="JS/jsFunctions.js"></script>
+        <script type="text/javascript" src="JS/identifierAjax.js"></script>
+        <script type="text/javascript" src="JS/authorInit.js"></script>
     </head>
     <body>
         <div id="container">
@@ -23,14 +25,6 @@ and open the template in the editor.
             <nav>
                 <ul>
                     <li class="direct">Album erstellen</li>
-                </ul>
-                <ul>
-                    <li>
-                        <h2>Album betrachten</h2>
-                        <ul>
-                            <li><a>test</a></li>
-                        </ul>
-                    </li>
                 </ul>
                 <ul>
                     <li>
@@ -47,6 +41,9 @@ and open the template in the editor.
                             <li><a>test</a></li>
                         </ul>
                     </li>
+                </ul>
+                <ul>
+                    <li class="direct" onclick="logout()">Benutzer abmelden</li>
                 </ul>
             </nav>
 

@@ -11,7 +11,7 @@ function identify()
 
 function receiveIdentity()
 {
-     if(xmlhttpIdentifier.readyState == 4 && xmlhttpIdentifier.status == 200)
+    if(xmlhttpIdentifier.readyState == 4 && xmlhttpIdentifier.status == 200)
     {
         var albumTitles = xmlhttpIdentifier.responseText.split(";");
         var contentDiv = $("content_div");

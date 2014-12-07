@@ -50,7 +50,7 @@ class DBManager
     
     function newUser($user, $password)
     {
-        $doc = array("username" => $user, "password" => $password, "albums" => array());
+        $doc = array("username" => $user, "password" => $password, "albums" => array("Album1"));
         DBManager::$users->insert($doc);
     }
 

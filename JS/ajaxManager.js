@@ -24,6 +24,9 @@ AjaxManager.prototype.receiveIdentity = function()
         var albumTitles = this.xmlhttp.responseText.split(";");
         var contentDiv = $("content_div");
         
+        var editClass;
+        var delClass;
+        
         for(i = 0; i < albumTitles.length - 1; i++)
         {
             var list = document.createElement("LI");
@@ -34,7 +37,13 @@ AjaxManager.prototype.receiveIdentity = function()
             
             span.innerHTML = albumTitles[i];
             list.appendChild(span);
+            list.addEventListener("click", albumHandler);
+            
+            list.setAttribute("class", "edit");          
             edit.appendChild(list.cloneNode(true));
+            
+            list.removeAttribute("class");
+            list.setAttribute("class", "del");
             del.appendChild(list.cloneNode(true));
             
             var div = document.createElement("DIV");
@@ -52,6 +61,12 @@ AjaxManager.prototype.receiveIdentity = function()
             div.appendChild(title);
             contentDiv.appendChild(div);
         }
+        editClass = document.getElementsByClassName("edit");
+        delClass = document.getElementsByClassName("del");
+        for (i = 0; i < editClass.length; i++)
+            editClass[i].addEventListener("click", albumHandler);
+        for (i = 0; i < delClass.length; i++)
+            delClass[i].addEventListener("click", albumHandler);
     }
 }
 

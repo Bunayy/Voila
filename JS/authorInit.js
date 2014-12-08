@@ -1,8 +1,9 @@
+var ajaxManObj = new AjaxManager();
 window.addEventListener("load", initAuthorPage(), false);
 
 function initAuthorPage()
 {
-    identify();
+    ajaxManObj.identify();
 }
 
 function logout()

@@ -14,7 +14,8 @@ and open the template in the editor.
         <link href="CSS/layout.css" rel="stylesheet" type="text/css"/>
         
         <script type="text/javascript" src="JS/jsFunctions.js"></script>
-        <script type="text/javascript" src="JS/loginRegistration.js"></script>
+        <script type="text/javascript" src="JS/ajaxManager.js"></script>
+        <script type="text/javascript" src="JS/loginRegistration.js"></script>      
     </head>
     <body onload="initLoginHTML()">
         <div id="container">
@@ -24,7 +25,7 @@ and open the template in the editor.
 
             <div id="login_div">
                 <form>
-                    Username: <input type="text" id="userInput" name="username" oninput="checkForAvailability(this.value)" required="required"/>
+                    Username: <input type="text" id="userInput" name="username" oninput="onInputHandler(this.value)" required="required"/>
                     Password: <input type="password" name="password" required="required"/>
                     <input type="submit" value="Anmelden" formmethod="post" formaction="PHP/loginHandler.php"/>
                     <input type="submit" value="Registrieren" id="registerButton" formaction="PHP/registrationHandler.php" formmethod="post"/>

@@ -5,11 +5,16 @@ function AjaxManager()
 
 AjaxManager.prototype.identify = function()
 {
-    this.xmlhttp.open("GET", "/Voila/PHP/registrationHandler.php?session=set", true);
+    var scope = this;
+    
+    this.xmlhttp.open("GET", "/Voila/PHP/authorDBManager.php", true);
      
     this.xmlhttp.send();
     
-    this.xmlhttp.onreadystatechange = this.receiveIdentity();
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.receiveIdentity();
+    };
 }
 
 AjaxManager.prototype.receiveIdentity = function()
@@ -36,16 +41,12 @@ AjaxManager.prototype.receiveIdentity = function()
             div.appendChild(title);
             contentDiv.appendChild(div);
         }
-        
-        if(this.xmlhttp.responseText != "")
-            $("registerButton").setAttribute("disabled", "disabled");
-        else
-            $("registerButton").removeAttribute("disabled");
     }
 }
 
 AjaxManager.prototype.checkForAvailability = function(str)
 {
+    var scope = this;
     if(str.length == 0)
     {
         $("availabilityInfo").innerHTML = "";
@@ -56,7 +57,10 @@ AjaxManager.prototype.checkForAvailability = function(str)
      
     this.xmlhttp.send();
     
-    this.xmlhttp.onreadystatechange = this.receiveAvailabilityStatus;
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.receiveAvailabilityStatus();
+    };
 }
 
 AjaxManager.prototype.receiveAvailabilityStatus = function ()

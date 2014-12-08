@@ -22,9 +22,9 @@ class DBManager
         DBManager::$albums = DBManager::$db->selectCollection('photoAlbums');
     }
 
-    function testUsernameAvailable($data) 
+    function testUsernameAvailable($name) 
     {
-        $user = DBManager::$users->findOne(array('username' => $data));
+        $user = DBManager::$users->findOne(array('username' => $name));
         if ($user == null) 
         {
             return true;
@@ -62,9 +62,8 @@ class DBManager
     
     function getAlbumListOfOneAuthor($name)
     {
-        $doc = DBManager::$users->findOne(array('username' => $name), array('albums'));
-        $list = $doc['albums'];
-        return $list;
+        $albumArray = DBManager::$users->findOne(array('username' => $name), array('albums'));
+        return $albumArray['albums'];
     }
     
     function getCompleteAlbumList()

@@ -24,8 +24,19 @@ AjaxManager.prototype.receiveIdentity = function()
         var albumTitles = this.xmlhttp.responseText.split(";");
         var contentDiv = $("content_div");
         
-        for(i = 0; i < albumTitles.length; i++)
+        for(i = 0; i < albumTitles.length - 1; i++)
         {
+            var list = document.createElement("LI");
+            var span = document.createElement("SPAN");
+            
+            var edit = $("edit");
+            var del = $("delete");
+            
+            span.innerHTML = albumTitles[i];
+            list.appendChild(span);
+            edit.appendChild(list.cloneNode(true));
+            del.appendChild(list.cloneNode(true));
+            
             var div = document.createElement("DIV");
             var icon = document.createElement("IMG");
             var title = document.createElement("H3");
@@ -34,7 +45,7 @@ AjaxManager.prototype.receiveIdentity = function()
             icon.setAttribute("class", "photoalbum");
             title.setAttribute("class", "photoalbum");
             
-            icon.setAttribute("src", "../Images/fotoalbum_icon.gif")
+            icon.setAttribute("src", "/Voila/Images/fotoalbum_icon.gif")
             title.innerHTML = albumTitles[i];
             
             div.appendChild(icon);

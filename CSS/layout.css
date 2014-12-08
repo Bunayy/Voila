@@ -75,7 +75,7 @@ nav h2
     margin: 0;
 }
 
-nav a
+nav span
 { 
     line-height: 2.5;
     font-size: 0.8em;
@@ -87,7 +87,7 @@ nav a
     color: #2E8B57;
 }
 
-nav a:hover
+nav span:hover
 {
     background-color: bisque;
     color: #000000;
@@ -110,11 +110,13 @@ nav ul li:hover h2
 {
     background-color: bisque;
     color: #000000;
+    cursor: pointer;
 }
 
 nav ul li:hover ul
 {
     display: block;
+    cursor: pointer;
 }
 
 .direct
@@ -130,6 +132,7 @@ nav ul li:hover ul
 {
     background-color: bisque;
     color: #000000;
+    cursor: pointer;
 }
 
 #content_div
@@ -138,6 +141,30 @@ nav ul li:hover ul
     text-align: justify;
     padding-left: 1vw;
     padding-right: 1vw;
+}
+
+div.photoalbum
+{
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+img.photoalbum
+{
+    overflow: hidden;
+}
+
+img.photoalbum:hover
+{
+    border: thin #000 solid;
+    cursor: pointer;
+}
+
+h3.photoalbum
+{
+    margin: 0 auto;
+    font-variant: small-caps;
 }
 
 #availabilityInfo

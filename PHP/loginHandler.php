@@ -3,11 +3,10 @@
 include './phpFunctions.php';
 include './mongoDB.php';
 
-$name = "";
-$password = "";
-
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
+    $name = "";
+    $password = "";
     $manager = new DBManager();
     
     $name = testInput($_POST["username"]);

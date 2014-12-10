@@ -1,7 +1,7 @@
 var ajaxManObj = new AjaxManager();
-window.addEventListener("load", initAuthorPage(), false);
+window.addEventListener("load", initEditorPage(), false);
 
-function initAuthorPage()
+function initEditorPage()
 {
     ajaxManObj.identify();
 }
@@ -9,11 +9,6 @@ function initAuthorPage()
 function logout()
 {
     window.location = "/Voila/PHP/logoutHandler.php"
-}
-
-function createAlbum()
-{
-    window.location = "/Voila/PHP/initEditor.php"
 }
 
 function albumHandler(e)
@@ -32,9 +27,3 @@ function albumHandler(e)
         //auf authorIndex.html 
     }
 }
-////////////////////////////////////
-//Handler zum Erstellen von Alben///
-////////////////////////////////////
-////////////////////////////////////
-//Handler zum Betrachten von Alben//
-////////////////////////////////////

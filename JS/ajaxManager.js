@@ -46,20 +46,23 @@ AjaxManager.prototype.receiveIdentity = function()
             list.setAttribute("class", "del");
             del.appendChild(list.cloneNode(true));
             
-            var div = document.createElement("DIV");
-            var icon = document.createElement("IMG");
-            var title = document.createElement("H3");
-            
-            div.setAttribute("class", "photoalbum");
-            icon.setAttribute("class", "photoalbum");
-            title.setAttribute("class", "photoalbum");
-            
-            icon.setAttribute("src", "/Voila/Images/fotoalbum_icon.gif")
-            title.innerHTML = albumTitles[i];
-            
-            div.appendChild(icon);
-            div.appendChild(title);
-            contentDiv.appendChild(div);
+            if(contentDiv !== null)
+            {
+                var div = document.createElement("DIV");
+                var icon = document.createElement("IMG");
+                var title = document.createElement("H3");
+
+                div.setAttribute("class", "photoalbum");
+                icon.setAttribute("class", "photoalbum");
+                title.setAttribute("class", "photoalbum");
+
+                icon.setAttribute("src", "/Voila/Images/fotoalbum_icon.gif")
+                title.innerHTML = albumTitles[i];
+
+                div.appendChild(icon);
+                div.appendChild(title);
+                contentDiv.appendChild(div);
+            }
         }
         editClass = document.getElementsByClassName("edit");
         delClass = document.getElementsByClassName("del");

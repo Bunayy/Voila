@@ -137,10 +137,15 @@ nav ul li:hover ul
 
 #content_div
 {
-    margin-top: 7vh;
     text-align: justify;
     padding-left: 1vw;
     padding-right: 1vw;
+}
+
+#editor_div
+{
+    float: left;
+    width: 100%;
 }
 
 div.photoalbum
@@ -171,6 +176,99 @@ h3.photoalbum
 {
     margin-top: 0.4vh;
     color: #DDDDDD;
+}
+
+#album_div
+{
+    width: 60%;
+    float: left;
+}
+
+#editor_div legend
+{
+    font-size: 20px;
+}
+
+label.field
+{
+    text-align: right;
+    width: 20%;
+    float: left;
+    font-weight: bold;
+}
+
+.shortField
+{
+    text-align: right;
+    width: 50%;
+    float: left;
+    font-weight: bold;
+}
+
+.forms
+{
+    width: 60%;
+    float: left;
+}
+
+.short
+{
+    float: left;
+}
+
+fieldset p
+{
+    padding: 5px;
+}
+
+#albumSubmit, #fileUpload, #fileSubmit, #publishSubmit
+{
+    width: 30%;
+    margin-left: 35%;
+    float: left;
+}
+
+#fotoList_div
+{
+    width: 40%;
+    float: left;
+}
+
+#fotoList_div fieldset
+{
+    margin: 0 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 510px;
+}
+
+#fotoList
+{ 
+    background-color: white;
+    text-align: center;
+    border-style: inset;
+    height: 92%;
+}
+
+#fotoList_div p
+{
+    z-index: -10;
+    border-bottom: thin solid #000000;
+    margin: 0;
+    padding: 5% 0;
+}
+
+#fotoList_div p:hover
+{
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+
+#info_div
+{
+    width: 60%;
+    float: left;
 }
 
 ::-webkit-scrollbar

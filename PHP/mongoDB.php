@@ -5,7 +5,8 @@ class DBManager
     private static $db;
     private static $users;
     private static $albums;
-
+    private static $gridFS;
+    
     function __construct()
     {
         if (DBManager::$connection == null)
@@ -20,6 +21,7 @@ class DBManager
         DBManager::$db = DBManager::$connection->selectDB('SPak530363_Voila_DB');
         DBManager::$users = DBManager::$db->selectCollection('registeredUsers');
         DBManager::$albums = DBManager::$db->selectCollection('photoAlbums');
+        DBManager::$gridFS = DBManager::$db->getGridFS();
     }
 
     function testUsernameAvailable($name) 
@@ -69,6 +71,34 @@ class DBManager
     function getCompleteAlbumList()
     {
         
+    }
+    
+    function setAlbum($oldname, $newName, $text, $user)
+    {
+        if($oldname == "")
+        {
+            $doc = array("title" => $newName, "username" => $user, "text" => $text, "fotos" => array());
+            DBManager::$albums->insert($doc);
+            
+            $album = DBManager::$albums->findOne(array('title' => $newName, 'username' => $user));
+        }
+        else
+        {
+            $album = DBManager::$albums->findAndModify(
+                        array('title' => $oldname, 'username' => $user),
+                        array('$set' => array('title' => $newName, "text" => $text)),
+                        null,
+                        array('new' => true)
+                    );
+        }
+        if ($album['title'] == $newName)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }  
     }
     
     function getAlbum($albumName)

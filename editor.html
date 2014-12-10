@@ -49,34 +49,34 @@ and open the template in the editor.
                 <div id="album_div">
                     <fieldset>
                         <legend>Album-Information</legend>
-                        <form>
-                            <p><label class="field" for="albumTitle">Titel:</label><input type="text" name="albumTitle" class="forms"></p>                   
-                            <p><label class="field" for="albumText">Text:</label><textarea name="albumText" rows="5" class="forms"></textarea></p>
+                        <form id="albumForm">
+                            <p><label class="field" for="albumTitle">Titel:</label><input type="text" name="albumTitle" class="forms" required="required" id="albumTitle"></p>                   
+                            <p><label class="field" for="albumText">Text:</label><textarea name="albumText" rows="5" class="forms"  id="albumText"></textarea></p>
                             <input id="albumSubmit" type="submit" value="Bestätigen">
                         </form>
                     </fieldset>
                     <fieldset>
                         <legend>Foto-Information</legend>
-                        <form>
-                            <p><label class="field" for="fotoTitle">Name:</label><input type="text" name="albumTitle" class="forms"></p>                   
-                            <p><label class="field" for="fotoText">Text:</label><textarea name="albumText" rows="5" class="forms"></textarea></p>
+                        <form id="fotoForm">
+                            <p><label class="field" for="fotoTitle">Name:</label><input type="text" name="fotoTitle" class="forms" id="fotoTitle"></p>                   
+                            <p><label class="field" for="fotoText">Text:</label><textarea name="fotoText" rows="5" class="forms" id="fotoText"></textarea></p>
                             <input id="fileUpload" type="file" name="fileUpload">
                             <input id="fileSubmit" type="submit" value="Bestätigen">
                         </form>
                     </fieldset>
                     <fieldset>
                         <legend>Weitere Information</legend>
-                        <form>
+                        <form id="publishForm">
                             <p>
                                 <label class="shortField" for="templateChoice">Template-Wahl: </label>
-                                <select name="templateChoice" class="short">
+                                <select name="templateChoice" class="short" id="templateChoice">
                                     <option value="template1">Template1</option>
                                     <option value="template2">Template2</option>
                                 </select>
                             </p>
                             <p>
                                 <label class="shortField" for="publishInput">Freigeben: </label>
-                                <input type="checkbox" name="publishInput" class="short">
+                                <input type="checkbox" name="publishInput" class="short" id="publishInput">
                             </p>
                             <input id="publishSubmit" type="submit" value="Bestätigen">
                         </form>

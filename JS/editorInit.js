@@ -1,9 +1,18 @@
 var ajaxManObj = new AjaxManager();
+var submitButton;
 window.addEventListener("load", initEditorPage(), false);
 
 function initEditorPage()
 {
     ajaxManObj.identify();
+    
+    var albumForm = $("albumForm");
+    var fotoForm = $("fotoForm");
+    var publishForm = $("publishForm");
+    
+    albumForm.addEventListener("submit", submitAlbumHandler);
+    fotoForm.addEventListener("submit", submitFotoHandler);
+    publishForm.addEventListener("submit", submitPublishHandler);
 }
 
 function logout()
@@ -26,4 +35,36 @@ function albumHandler(e)
         //Entfernen des Albums aus der DB und anschließend Weiterleitung
         //auf authorIndex.html 
     }
+}
+
+function submitAlbumHandler(e)
+{
+    e.preventDefault();
+    
+    submitButton = $("albumSubmit");
+    submitButton.innerHTML = "Uploading...";
+    
+    var albumTitle = $("albumTitle").value;
+    var albumText = $("albumText").value;
+    
+    var formData = new FormData();
+    
+    formData.append("albumTitle", albumTitle);
+    formData.append("albumText", albumText);
+    
+    ajaxManObj.setAlbum(formData);
+}
+
+function submitFotoHandler(e)
+{
+    e.preventDefault();
+    submitButton = $("fileSubmit");
+    submitButton.innerHTML = "Uploading...";
+}
+
+function submitPublishHandler(e)
+{
+    e.preventDefault();
+    submitButton = $("publishSubmit");
+    submitButton.innerHTML = "Uploading...";
 }

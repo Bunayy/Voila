@@ -27,14 +27,20 @@ AjaxManager.prototype.receiveIdentity = function()
         var editClass;
         var delClass;
         
+        var edit = $("edit");
+        var del = $("delete");
+        
+        while(edit.hasChildNodes())
+        {
+            edit.removeChild(edit.firstChild);
+            del.removeChild(del.firstChild);
+        }
+        
         for(i = 0; i < albumTitles.length - 1; i++)
         {
             var list = document.createElement("LI");
             var span = document.createElement("SPAN");
-            
-            var edit = $("edit");
-            var del = $("delete");
-            
+           
             span.innerHTML = albumTitles[i];
             list.appendChild(span);
             list.addEventListener("click", albumHandler);
@@ -124,6 +130,49 @@ AjaxManager.prototype.getCreatedAlbum = function ()
 {
     if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
     {
+        var msg = "Sie haben bereits ein Album mit diesem Namen!";
+        $("albumSubmit").value = "Bestätigen";
+        if(this.xmlhttp.responseText != msg)
+        {
+            msg = this.xmlhttp.responseText.split(";");
+            $("albumTitle").value = msg[1];
+            $("albumText").value = msg[2];
+            if(msg[0] == "false")
+            {
+                alert("Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!")
+            }
+            this.identify();
+        }
+        else
+        {
+            alert(msg);
+        }
         
+    }
+}
+
+AjaxManager.prototype.getAlbumInfos = function ()
+{
+    var scope = this;
+    
+    this.xmlhttp.open("GET", "/Voila/PHP/editorHandler.php", true);
+      
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.receiveAlbumInfos();
+    };
+    
+    this.xmlhttp.send();
+}
+
+AjaxManager.prototype.receiveAlbumInfos = function ()
+{
+    if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
+    {
+        msg = this.xmlhttp.responseText.split(";");
+        $("albumTitle").value = msg[0];
+        $("albumText").value = msg[1];
+        
+        this.identify();
     }
 }

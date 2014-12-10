@@ -16,7 +16,7 @@ and open the template in the editor.
         <script type="text/javascript" src="JS/ajaxManager.js"></script>
         <script type="text/javascript" src="JS/editorInit.js"></script>
     </head>
-    <body>
+    <body onload="initEditorPage()">
         <div id="container">
             <header>
                 <h1>Voila</h1>
@@ -24,7 +24,7 @@ and open the template in the editor.
             
             <nav>
                 <ul>
-                    <li class="direct">Album erstellen</li>
+                    <li class="direct" onclick="createAlbum()">Album erstellen</li>
                 </ul>
                 <ul>
                     <li>

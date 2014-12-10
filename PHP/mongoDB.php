@@ -52,7 +52,7 @@ class DBManager
     
     function newUser($user, $password)
     {
-        $doc = array("username" => $user, "password" => $password, "albums" => array("Album1"));
+        $doc = array("username" => $user, "password" => $password, "albums" => array());
         DBManager::$users->insert($doc);
     }
 
@@ -62,6 +62,29 @@ class DBManager
         return $userlist;
     }
     
+    function setAlbumListOfOneAuthor($name, $array)
+    {
+        $album = DBManager::$users->findAndModify(
+                        array('username' => $name),
+                        array('$set' => array('albums' => $array)),
+                        array(),
+                        array('new' => true)
+                    );
+    }
+    
+    function testAlbumNameAvailable($user, $album)
+    {
+        $albumList = $this->getAlbumListOfOneAuthor($user);
+        for($i = 0; $i< count($albumList); $i++)
+        {
+            if($albumList[$i] == $album)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+            
     function getAlbumListOfOneAuthor($name)
     {
         $albumArray = DBManager::$users->findOne(array('username' => $name), array('albums'));
@@ -73,24 +96,42 @@ class DBManager
         
     }
     
+    function getAlbumInformation($user, $albumTitle)
+    {
+        $album = DBManager::$albums->findOne(array('title' => $albumTitle, 'username' => $user));
+        return $album;
+    }
+    
     function setAlbum($oldname, $newName, $text, $user)
     {
+        $albumList = $this->getAlbumListOfOneAuthor($user);
+        
         if($oldname == "")
         {
             $doc = array("title" => $newName, "username" => $user, "text" => $text, "fotos" => array());
             DBManager::$albums->insert($doc);
             
             $album = DBManager::$albums->findOne(array('title' => $newName, 'username' => $user));
+            
+            array_push($albumList, $newName);              
         }
         else
         {
             $album = DBManager::$albums->findAndModify(
                         array('title' => $oldname, 'username' => $user),
                         array('$set' => array('title' => $newName, "text" => $text)),
-                        null,
+                        array(),
                         array('new' => true)
                     );
+            for($i = 0; $i< count($albumList); $i++)
+            {
+                if($albumList[$i] == $oldname)
+                    $albumList[$i] = $newName;
+            }
         }
+        
+        $this->setAlbumListOfOneAuthor($user, $albumList); 
+        
         if ($album['title'] == $newName)
             {
                 return true;

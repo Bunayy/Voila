@@ -1,10 +1,9 @@
 var ajaxManObj = new AjaxManager();
 var submitButton;
-window.addEventListener("load", initEditorPage(), false);
 
 function initEditorPage()
 {
-    ajaxManObj.identify();
+    ajaxManObj.getAlbumInfos();
     
     var albumForm = $("albumForm");
     var fotoForm = $("fotoForm");
@@ -18,6 +17,11 @@ function initEditorPage()
 function logout()
 {
     window.location = "/Voila/PHP/logoutHandler.php"
+}
+
+function createAlbum()
+{
+    window.location = "/Voila/PHP/initEditor.php"
 }
 
 function albumHandler(e)
@@ -42,7 +46,7 @@ function submitAlbumHandler(e)
     e.preventDefault();
     
     submitButton = $("albumSubmit");
-    submitButton.innerHTML = "Uploading...";
+    submitButton.value = "Uploading...";
     
     var albumTitle = $("albumTitle").value;
     var albumText = $("albumText").value;
@@ -52,7 +56,7 @@ function submitAlbumHandler(e)
     formData.append("albumTitle", albumTitle);
     formData.append("albumText", albumText);
     
-    ajaxManObj.setAlbum(formData);
+    ajaxManObj.setAlbum(formData); 
 }
 
 function submitFotoHandler(e)

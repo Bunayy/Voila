@@ -62,8 +62,21 @@ function submitAlbumHandler(e)
 function submitFotoHandler(e)
 {
     e.preventDefault();
+    
     submitButton = $("fileSubmit");
     submitButton.innerHTML = "Uploading...";
+    
+    var fotoTitle = $("fotoTitle").value;
+    var fotoText = $("fotoText").value;
+    var fileInput = $("fileUpload");
+    
+    var file = fileInput.files[0];  
+    var formData = new FormData();
+    
+    formData.append("fotoText", fotoText);
+    formData.append('photo', file, fotoTitle);
+    
+    ajaxManObj.setPhoto(formData);
 }
 
 function submitPublishHandler(e)

@@ -62,6 +62,22 @@ class DBManager
         return $userlist;
     }
     
+    function addPhoto($user, $albumname, $photo, $phototext)
+    {
+        $wantedAlbum = DBManager::$albums->findOne(array("username" => $user, "title" => $albumname));
+        $photoArray = $wantedAlbum["photos"];
+        array_push($photoArray, $photo["name"]);
+        $album = DBManager::$albums->findAndModify(
+                        array('title' => $oldname, 'username' => $user),
+                        array('$set' => array('photos' => $photoArray)),
+                        array(),
+                        array('new' => true)
+                    );
+        
+        
+        
+    }
+            
     function setAlbumListOfOneAuthor($name, $array)
     {
         $album = DBManager::$users->findAndModify(
@@ -108,7 +124,7 @@ class DBManager
         
         if($oldname == "")
         {
-            $doc = array("title" => $newName, "username" => $user, "text" => $text, "fotos" => array());
+            $doc = array("title" => $newName, "username" => $user, "text" => $text, "photos" => array());
             DBManager::$albums->insert($doc);
             
             $album = DBManager::$albums->findOne(array('title' => $newName, 'username' => $user));

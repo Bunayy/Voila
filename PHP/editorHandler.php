@@ -7,13 +7,27 @@ $manager = new DBManager();
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {   
     $answer;
-    
-    if($manager->testAlbumNameAvailable($_SESSION["username"], $_POST["albumTitle"]) == true)
+    if(!isset($_SESSION["album"]))
+    {
+        if($manager->testAlbumNameAvailable($_SESSION["username"], $_POST["albumTitle"]))
+        {
+            $answer = $manager->setAlbum ("", $_POST["albumTitle"], $_POST["albumText"], $_SESSION["username"]);
+            $_SESSION["album"] = $_POST["albumTitle"];
+            echo "true;" . $_POST["albumTitle"] . ";" . $_POST["albumText"];
+        }
+        else
+        {
+            echo 'Sie haben bereits ein Album mit diesem Namen!';
+        }
+    }
+    else if(($manager->testAlbumNameAvailable($_SESSION["username"], $_POST["albumTitle"])) == true || ($_SESSION["album"] == $_POST["albumTitle"]))
     {
         if(isset($_SESSION["album"]))
             $answer = $manager->setAlbum ($_SESSION["album"], $_POST["albumTitle"], $_POST["albumText"], $_SESSION["username"]);
         else
+        {
             $answer = $manager->setAlbum ("", $_POST["albumTitle"], $_POST["albumText"], $_SESSION["username"]);
+        }
 
         if($answer == true)
         {

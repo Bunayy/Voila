@@ -132,9 +132,15 @@ AjaxManager.prototype.getCreatedAlbum = function ()
     {
         var msg = "Sie haben bereits ein Album mit diesem Namen!";
         $("albumSubmit").value = "Bestätigen";
-        if(this.xmlhttp.responseText != msg)
+        
+        if(this.xmlhttp.responseText == msg)
+        {
+            alert(msg);
+        }
+        else
         {
             msg = this.xmlhttp.responseText.split(";");
+            
             $("albumTitle").value = msg[1];
             $("albumText").value = msg[2];
             if(msg[0] == "false")
@@ -143,11 +149,6 @@ AjaxManager.prototype.getCreatedAlbum = function ()
             }
             this.identify();
         }
-        else
-        {
-            alert(msg);
-        }
-        
     }
 }
 
@@ -166,6 +167,32 @@ AjaxManager.prototype.getAlbumInfos = function ()
 }
 
 AjaxManager.prototype.receiveAlbumInfos = function ()
+{
+    if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
+    {
+        msg = this.xmlhttp.responseText.split(";");
+        $("albumTitle").value = msg[0];
+        $("albumText").value = msg[1];
+        
+        this.identify();
+    }
+}
+
+AjaxManager.prototype.setPhoto = function (formdata)
+{
+    var scope = this;
+    
+    this.xmlhttp.open("POST", "/Voila/PHP/photoUploadHandler.php", true);
+      
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.getCreatedAlbum();
+    };
+    
+    this.xmlhttp.send(formdata);
+}
+
+AjaxManager.prototype.receivePhoto = function ()
 {
     if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
     {

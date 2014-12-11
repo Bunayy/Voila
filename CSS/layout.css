@@ -157,6 +157,7 @@ div.photoalbum
 
 img.photoalbum
 {
+    border: thin #DDDDDD solid;
     overflow: hidden;
 }
 

@@ -14,7 +14,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     else
     {
         
-        $manager->addPhoto($_SESSION["username"], $_SESSION["album"], $_FILES["photo"], $_POST["fotoText"]);
+        $msg = $manager->addPhoto($_SESSION["username"], $_SESSION["album"], $_FILES, $_POST["fotoText"]);
+        echo $msg;
     }
 }
 

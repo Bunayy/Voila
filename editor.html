@@ -46,6 +46,16 @@ and open the template in the editor.
             </nav>
 
             <div id="editor_div">
+                <div class="invisible">
+                    <fieldset>
+                        <legend id="legend"></legend>
+                        <form id="fotoFormInvisible">
+                            <p><label class="field" for="fotoTitleInvisible">Name:</label><input type="text" name="fotoTitleInvisible" class="forms" id="fotoTitleInvisible"></p>                   
+                            <p><label class="field" for="fotoTextInvisible">Text:</label><textarea name="fotoTextInvisible" rows="5" class="forms" id="fotoTextInvisible"></textarea></p>
+                            <input id="fileSubmitInvisible" type="submit" value="Bestätigen">
+                        </form>
+                    </fieldset>
+                </div>
                 <div id="album_div">
                     <fieldset>
                         <legend>Album-Information</legend>
@@ -60,7 +70,7 @@ and open the template in the editor.
                         <form id="fotoForm">
                             <p><label class="field" for="fotoTitle">Name:</label><input type="text" name="fotoTitle" class="forms" id="fotoTitle"></p>                   
                             <p><label class="field" for="fotoText">Text:</label><textarea name="fotoText" rows="5" class="forms" id="fotoText"></textarea></p>
-                            <input id="fileUpload" type="file" name="fileUpload">
+                            <input id="fileUpload" type="file" name="fileUpload" accept="image/*">
                             <input id="fileSubmit" type="submit" value="Bestätigen">
                         </form>
                     </fieldset>

@@ -62,20 +62,61 @@ class DBManager
         return $userlist;
     }
     
+    function getPhotoInfo($user, $albumname, $photo)
+    {
+        $files = DBManager::$db->fs->files;
+        $file = $files->findOne(array('username' => $user, 'album' => $albumname, 'photoname' => $photo));
+        
+        return $file['phototext'];
+    }
+            
     function addPhoto($user, $albumname, $photo, $phototext)
     {
         $wantedAlbum = DBManager::$albums->findOne(array("username" => $user, "title" => $albumname));
         $photoArray = $wantedAlbum["photos"];
-        array_push($photoArray, $photo["name"]);
+        
+        for ($index = 0; $index < count($photoArray); $index++)
+        {
+            if($photoArray[$index] == $photo["photo"]["name"])
+                return "Sie haben bereits ein Foto in diesem Album mit diesem Namen!";
+        }
+        
+        array_push($photoArray, $photo["photo"]["name"]);
         $album = DBManager::$albums->findAndModify(
-                        array('title' => $oldname, 'username' => $user),
+                        array('title' => $albumname, 'username' => $user),
                         array('$set' => array('photos' => $photoArray)),
                         array(),
                         array('new' => true)
                     );
         
+        DBManager::$gridFS->storeUpload('photo', array('photoname' => $photo["photo"]["name"], 'phototext' => $phototext, 'username' => $user, 'album' => $albumname));
         
+        return true;
+    }
+    
+    function editPhoto($user, $albumname, $oldname, $newname, $phototext)
+    {
+        $wantedAlbum = DBManager::$albums->findOne(array("username" => $user, "title" => $albumname));
+        $photoArray = $wantedAlbum["photos"];
         
+        for($i = 0; $i< count($photoArray); $i++)
+        {
+            if($photoArray[$i] == $oldname)
+                $photoArray[$i] = $newname;
+        }
+        $album = DBManager::$albums->findAndModify(
+                    array('title' => $albumname, 'username' => $user),
+                    array('$set' => array('photos' => $photoArray)),
+                    array(),
+                    array('new' => true)
+                );
+        $photo = DBManager::$gridFS->findAndModify(
+                    array('photoname' => $oldname, 'username' => $user, 'album' => $albumname),
+                    array('$set' => array('photoname' => $newname, 'phototext' => $phototext)),
+                    array(),
+                    array('new' => true)
+                );
+        return $this->getPhotoInfo($user, $albumname, $newname);
     }
             
     function setAlbumListOfOneAuthor($name, $array)
@@ -161,6 +202,13 @@ class DBManager
     function getAlbum($albumName)
     {
         
+    }
+    
+    function getPhotoNames($user, $album)
+    {
+        $wantedAlbum = DBManager::$albums->findOne(array("username" => $user, "title" => $album));
+        $photoArray = $wantedAlbum["photos"];
+        return $photoArray;
     }
     
     function deleteUser($data)

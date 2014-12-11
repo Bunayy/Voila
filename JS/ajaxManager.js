@@ -106,9 +106,15 @@ AjaxManager.prototype.receiveAvailabilityStatus = function ()
         inf.innerHTML = this.xmlhttp.responseText;
         
         if(this.xmlhttp.responseText != "")
+        {
             $("registerButton").setAttribute("disabled", "disabled");
+            $("loginButton").removeAttribute("disabled");
+        }
         else
+        {
             $("registerButton").removeAttribute("disabled");
+            $("loginButton").setAttribute("disabled", "disabled");
+        }
     }
 }
 
@@ -156,7 +162,7 @@ AjaxManager.prototype.getAlbumInfos = function ()
 {
     var scope = this;
     
-    this.xmlhttp.open("GET", "/Voila/PHP/editorHandler.php", true);
+    this.xmlhttp.open("GET", "/Voila/PHP/editorHandler.php?request=album", true);
       
     this.xmlhttp.onreadystatechange = function()
     {
@@ -170,11 +176,37 @@ AjaxManager.prototype.receiveAlbumInfos = function ()
 {
     if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
     {
-        msg = this.xmlhttp.responseText.split(";");
+        var msg = this.xmlhttp.responseText.split(";");
         $("albumTitle").value = msg[0];
         $("albumText").value = msg[1];
+
+        if(msg[0] != "")
+            this.getPhotos();
+    }
+}
+
+AjaxManager.prototype.getPhotoInfos = function (name)
+{
+    var scope = this;
+    
+    this.xmlhttp.open("GET", "/Voila/PHP/editorHandler.php?request=photoInfo&name=" + name, true);
+      
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.receivePhotoInfos();
+    };
+    
+    this.xmlhttp.send();
+}
+
+AjaxManager.prototype.receivePhotoInfos = function ()
+{
+    if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
+    {
+        var msg = this.xmlhttp.responseText;
+        $("fotoTextInvisible").value = msg;
         
-        this.identify();
+        this.getPhotos();
     }
 }
 
@@ -186,20 +218,97 @@ AjaxManager.prototype.setPhoto = function (formdata)
       
     this.xmlhttp.onreadystatechange = function()
     {
-       scope.getCreatedAlbum();
+       scope.receivePhotoResponse();
     };
     
     this.xmlhttp.send(formdata);
 }
 
-AjaxManager.prototype.receivePhoto = function ()
+AjaxManager.prototype.receivePhotoResponse = function ()
 {
     if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
     {
-        msg = this.xmlhttp.responseText.split(";");
-        $("albumTitle").value = msg[0];
-        $("albumText").value = msg[1];
+        var msg = this.xmlhttp.responseText;
+        submitButton.innerHTML = "Bestätigen";
         
+        if(msg == "1")
+        {
+            $("fotoTitle").value = "";
+            $("fotoText").value = "";
+            var fileInput = $("fileUpload");
+            for(i = 0; i < fileInput.files.length; i++)
+                fileInput.files[i] = null;
+            
+            this.getPhotos();
+        }
+        else
+            alert(msg);
+    }
+}
+
+AjaxManager.prototype.getPhotos = function ()
+{
+    var scope = this;
+    
+    this.xmlhttp.open("GET", "/Voila/PHP/editorHandler.php?request=addingPhoto", true);
+      
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.receivePhotos();
+    };
+    
+    this.xmlhttp.send();
+}
+
+AjaxManager.prototype.receivePhotos = function ()
+{
+    if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
+    {
+        if(this.xmlhttp.responseText != "")
+        {
+            var msg = this.xmlhttp.responseText.split(";");
+            
+            while($("fotoList").hasChildNodes())
+            {
+                $("fotoList").removeChild($("fotoList").firstChild);
+            }
+
+            for(i = 0; i < msg.length; i++)
+            {
+                var photo = document.createElement("P");
+                photo.setAttribute("class", "photo");
+                photo.setAttribute("id", msg[i]);
+                photo.addEventListener("click", editPhoto, false);
+                photo.innerHTML = msg[i];
+                $("fotoList").appendChild(photo);
+            }
+        }
+  
         this.identify();
+    }
+}
+
+AjaxManager.prototype.editPhoto = function (newTitle, oldTitle, photoText)
+{
+    var scope = this;
+    
+    this.xmlhttp.open("GET", "/Voila/PHP/editorHandler.php?request=editingPhoto&oldname="
+            + oldTitle + "&newname=" + newTitle + "&phototext=" + photoText, true);
+      
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.receivePhotoEditAnswer();
+    };
+    
+    this.xmlhttp.send();
+}
+
+AjaxManager.prototype.receivePhotoEditAnswer = function ()
+{
+    if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
+    {
+        $("legend").innerHTML = $("fotoTitleInvisible").value;
+        $("fotoTextInvisible").value = this.xmlhttp.responseText;
+        this.getPhotos();
     }
 }

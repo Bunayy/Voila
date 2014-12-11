@@ -48,9 +48,35 @@ elseif ($_SERVER["REQUEST_METHOD"]=="GET")
 {
     if(isset($_SESSION["album"]))
     {
-        $infos = $manager->getAlbumInformation($_SESSION["username"], $_SESSION["album"]);
-    
-        echo $infos["title"] . ";" . $infos["text"];
+        if($_GET["request"] == "album")
+        {
+            $infos = $manager->getAlbumInformation($_SESSION["username"], $_SESSION["album"]);
+
+            echo $infos["title"] . ";" . $infos["text"];
+        }
+        else if($_GET["request"] == "addingPhoto")
+        {
+            $msg = "";
+            $infos = $manager->getPhotoNames($_SESSION["username"], $_SESSION["album"]);
+            
+            for ($index = 0; $index < count($infos); $index++)
+            {
+                $msg = $msg . $infos[$index];
+                if(($index+1) != count($infos))
+                    $msg = $msg . ";";
+            }
+            echo $msg;
+        }
+        else if($_GET["request"] == "editingPhoto")
+        {
+            $infos = $manager->editPhoto($_SESSION["username"], $_SESSION["album"], $_GET["oldname"], $_GET["newname"], $_GET["phototext"]);
+            echo $infos;
+        }
+        else if($_GET["request"] == "photoInfo")
+        {
+            $infos = $manager->getPhotoInfo($_SESSION["username"], $_SESSION["album"], $_GET["name"]);
+            echo $infos;
+        }
     }
     else
         echo ';';

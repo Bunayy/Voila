@@ -274,14 +274,13 @@ fieldset p
 
 #fotoDivInvisible
 {
-    width: 60%;
-    margin:10% 15%;
+    width: 40%;
     z-index: 20000;
-    margin-top: -29%;
     padding: 2.5%;
     float: left;
     background-color: #C0C0C0;
     border-style: outset;
+    position: absolute;
 }
 
 .invisible

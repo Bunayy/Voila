@@ -65,7 +65,7 @@ class DBManager
     function getPhotoInfo($user, $albumname, $photo)
     {
         $files = DBManager::$db->fs->files;
-        $file = $files->findOne(array('username' => $user, 'album' => $albumname, 'photoname' => $photo));
+        $file = $files->findOne(array('username' => $user, 'album' => $albumname, 'filename' => $photo));
         
         return $file['phototext'];
     }
@@ -89,7 +89,7 @@ class DBManager
                         array('new' => true)
                     );
         
-        DBManager::$gridFS->storeUpload('photo', array('photoname' => $photo["photo"]["name"], 'phototext' => $phototext, 'username' => $user, 'album' => $albumname));
+        DBManager::$gridFS->storeUpload('photo', array('phototext' => $phototext, 'username' => $user, 'album' => $albumname));
         
         return true;
     }
@@ -102,7 +102,9 @@ class DBManager
         for($i = 0; $i< count($photoArray); $i++)
         {
             if($photoArray[$i] == $oldname)
+            {
                 $photoArray[$i] = $newname;
+            }
         }
         $album = DBManager::$albums->findAndModify(
                     array('title' => $albumname, 'username' => $user),
@@ -111,8 +113,8 @@ class DBManager
                     array('new' => true)
                 );
         $photo = DBManager::$gridFS->findAndModify(
-                    array('photoname' => $oldname, 'username' => $user, 'album' => $albumname),
-                    array('$set' => array('photoname' => $newname, 'phototext' => $phototext)),
+                    array('filename' => $oldname, 'username' => $user, 'album' => $albumname),
+                    array('$set' => array('filename' => $newname, 'phototext' => $phototext)),
                     array(),
                     array('new' => true)
                 );
@@ -165,7 +167,7 @@ class DBManager
         
         if($oldname == "")
         {
-            $doc = array("title" => $newName, "username" => $user, "text" => $text, "photos" => array());
+            $doc = array("title" => $newName, "username" => $user, "text" => $text, "photos" => array(), "publish" => 'false', "template" => 'template1');
             DBManager::$albums->insert($doc);
             
             $album = DBManager::$albums->findOne(array('title' => $newName, 'username' => $user));

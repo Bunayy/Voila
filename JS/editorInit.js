@@ -1,5 +1,6 @@
 var ajaxManObj = new AjaxManager();
 window.addEventListener("click", mouseClickHandler, false);
+window.addEventListener("resize", resizeHandler, false);
 
 var submitButton;
 
@@ -16,6 +17,20 @@ function initEditorPage()
     fotoForm.addEventListener("submit", submitFotoHandler);
     publishForm.addEventListener("submit", submitPublishHandler);
     fotoFormInvisible.addEventListener("submit", submitFotoHandlerInvisible);
+    
+    resizeHandler();
+}
+
+function resizeHandler()
+{
+    var invisibleDiv = $("fotoDivInvisible");
+    var displayWidth = window.innerWidth;
+    var displayHeight = window.innerHeight;
+    var pointX = (displayWidth/2) - (invisibleDiv.offsetWidth/2);
+    var pointY = (displayHeight/2) - (invisibleDiv.offsetHeight/2);
+    
+    invisibleDiv.style.left = pointX + "px";
+    invisibleDiv.style.top = pointY + "px";
 }
 
 function logout()

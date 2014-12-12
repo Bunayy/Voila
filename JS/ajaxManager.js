@@ -182,6 +182,8 @@ AjaxManager.prototype.receiveAlbumInfos = function ()
 
         if(msg[0] != "")
             this.getPhotos();
+        else
+            this.identify();
     }
 }
 
@@ -278,7 +280,6 @@ AjaxManager.prototype.receivePhotos = function ()
                 var photo = document.createElement("P");
                 photo.setAttribute("class", "photo");
                 photo.setAttribute("id", msg[i]);
-                photo.addEventListener("click", editPhoto, false);
                 photo.innerHTML = msg[i];
                 $("fotoList").appendChild(photo);
             }

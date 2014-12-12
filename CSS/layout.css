@@ -45,21 +45,21 @@ h1
 
 nav
 {
-    width: 52%;
+    width: 70%;
     background-color: #2E8B57;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
     float: left;
-    padding-left: 24%;
-    padding-right: 24%;
+    padding-left: 15%;
+    padding-right: 15%;
 }
 
 nav ul
 {
     float: left;
     list-style-type: none;
-    width: 25%;
+    width: 16.6%;
     min-width: 137px;
     margin: 0;
     padding-left: 0;
@@ -222,7 +222,7 @@ fieldset p
     padding: 5px;
 }
 
-#albumSubmit, #fileUpload, #fileSubmit, #publishSubmit
+#albumSubmit, #fileUpload, #fileSubmit, #publishSubmit, #fileSubmitInvisible
 {
     width: 30%;
     margin-left: 35%;
@@ -270,6 +270,28 @@ fieldset p
 {
     width: 60%;
     float: left;
+}
+
+#fotoDivInvisible
+{
+    width: 60%;
+    margin:10% 15%;
+    z-index: 20000;
+    margin-top: -29%;
+    padding: 2.5%;
+    float: left;
+    background-color: #C0C0C0;
+    border-style: outset;
+}
+
+.invisible
+{
+    visibility: hidden;
+}
+
+.visible
+{
+    visibility: visible;
 }
 
 ::-webkit-scrollbar

@@ -1,4 +1,6 @@
 var ajaxManObj = new AjaxManager();
+window.addEventListener("click", mouseClickHandler, false);
+
 var submitButton;
 
 function initEditorPage()
@@ -106,7 +108,7 @@ function submitFotoHandlerInvisible(e)
 
 function editPhoto(e)
 {
-    var invisibleDiv = $("fotoFormInvisible");
+    var invisibleDiv = $("fotoDivInvisible");
     invisibleDiv.setAttribute("class", "visible");
     
     var photoName = e.currentTarget.id;
@@ -114,4 +116,32 @@ function editPhoto(e)
     $("fotoTitleInvisible").value = photoName;
     
     ajaxManObj.getPhotoInfos(photoName);  
+}
+
+function home()
+{
+    window.location = "/Voila/authorIndex.html";
+}
+
+function changePW()
+{
+    
+}
+
+function mouseClickHandler(e)
+{
+    var srcClass = e.target.className;
+    var invisibleDiv = $("fotoDivInvisible");
+    
+    if(srcClass == "photo" && invisibleDiv.getAttribute("class") == "hide invisible")
+    {
+        invisibleDiv.setAttribute("class", "hide visible");
+        var photoName = e.target.id;
+        $("legend").innerHTML = photoName;
+        $("fotoTitleInvisible").value = photoName;
+    
+    ajaxManObj.getPhotoInfos(photoName);
+    }
+    else if(srcClass.substring(0,4) != "hide" && invisibleDiv.getAttribute("class") == "hide visible")
+        invisibleDiv.setAttribute("class", "hide invisible");
 }

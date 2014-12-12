@@ -8,12 +8,12 @@ function initAuthorPage()
 
 function logout()
 {
-    window.location = "/Voila/PHP/logoutHandler.php"
+    window.location = "/Voila/PHP/logoutHandler.php";
 }
 
 function createAlbum()
 {
-    window.location = "/Voila/PHP/initEditor.php"
+    window.location = "/Voila/PHP/initEditor.php";
 }
 
 function albumHandler(e)
@@ -31,6 +31,16 @@ function albumHandler(e)
         //Entfernen des Albums aus der DB und anschließend Weiterleitung
         //auf authorIndex.html 
     }
+}
+
+function home()
+{
+    window.location = "/Voila/authorIndex.html";
+}
+
+function changePW()
+{
+    
 }
 ////////////////////////////////////
 //Handler zum Erstellen von Alben///

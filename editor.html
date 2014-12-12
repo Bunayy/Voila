@@ -24,6 +24,9 @@ and open the template in the editor.
             
             <nav>
                 <ul>
+                    <li class="direct" onclick="home()">Authoren Startseite</li>
+                </ul>
+                <ul>
                     <li class="direct" onclick="createAlbum()">Album erstellen</li>
                 </ul>
                 <ul>
@@ -41,21 +44,14 @@ and open the template in the editor.
                     </li>
                 </ul>
                 <ul>
+                    <li class="direct" onclick="changePW()">Passwort ändern</li>
+                </ul>
+                <ul>
                     <li class="direct" onclick="logout()">Benutzer abmelden</li>
                 </ul>
             </nav>
 
             <div id="editor_div">
-                <div class="invisible">
-                    <fieldset>
-                        <legend id="legend"></legend>
-                        <form id="fotoFormInvisible">
-                            <p><label class="field" for="fotoTitleInvisible">Name:</label><input type="text" name="fotoTitleInvisible" class="forms" id="fotoTitleInvisible"></p>                   
-                            <p><label class="field" for="fotoTextInvisible">Text:</label><textarea name="fotoTextInvisible" rows="5" class="forms" id="fotoTextInvisible"></textarea></p>
-                            <input id="fileSubmitInvisible" type="submit" value="Bestätigen">
-                        </form>
-                    </fieldset>
-                </div>
                 <div id="album_div">
                     <fieldset>
                         <legend>Album-Information</legend>
@@ -96,6 +92,16 @@ and open the template in the editor.
                     <fieldset>
                         <legend>Fotos</legend>
                         <div id="fotoList"></div>
+                    </fieldset>
+                </div>
+                <div class="hide invisible" id="fotoDivInvisible">
+                    <fieldset class="hide">
+                        <legend id="legend" class="hide"></legend>
+                        <form id="fotoFormInvisible" class="hide">
+                            <p class="hide"><label class="hide field" for="fotoTitleInvisible">Name:</label><input type="text" name="fotoTitleInvisible" class="hide forms" id="fotoTitleInvisible"></p>                   
+                            <p class="hide"><label class="hide field" for="fotoTextInvisible">Text:</label><textarea name="fotoTextInvisible" rows="5" class="hide forms" id="fotoTextInvisible"></textarea></p>
+                            <input id="fileSubmitInvisible" type="submit" value="Bestätigen" class="hide">
+                        </form>
                     </fieldset>
                 </div>
             </div>

@@ -185,7 +185,7 @@ h3.photoalbum
     float: left;
 }
 
-#editor_div legend
+legend
 {
     font-size: 20px;
 }
@@ -222,7 +222,7 @@ fieldset p
     padding: 5px;
 }
 
-#albumSubmit, #fileUpload, #fileSubmit, #publishSubmit, #fileSubmitInvisible
+#albumSubmit, #fileUpload, #fileSubmit, #publishSubmit, #fileSubmitInvisible, #pwSubmitInvisible
 {
     width: 30%;
     margin-left: 35%;
@@ -272,7 +272,7 @@ fieldset p
     float: left;
 }
 
-#fotoDivInvisible
+#fotoDivInvisible, #pwDivInvisible
 {
     width: 40%;
     z-index: 20000;

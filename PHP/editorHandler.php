@@ -52,7 +52,7 @@ elseif ($_SERVER["REQUEST_METHOD"]=="GET")
         {
             $infos = $manager->getAlbumInformation($_SESSION["username"], $_SESSION["album"]);
 
-            echo $infos["title"] . ";" . $infos["text"];
+            echo $infos["title"] . ";" . $infos["text"] . ";" . $infos["publish"] . ";" . $infos["template"];
         }
         else if($_GET["request"] == "addingPhoto")
         {
@@ -77,9 +77,18 @@ elseif ($_SERVER["REQUEST_METHOD"]=="GET")
             $infos = $manager->getPhotoInfo($_SESSION["username"], $_SESSION["album"], $_GET["name"]);
             echo $infos;
         }
+        else if($_GET["request"] == "publish")
+        {
+            $infos = $manager->setPublicity($_SESSION["username"], $_SESSION["album"], $_GET["publish"], $_GET["template"]);
+            echo $infos;
+        }
     }
     else
-        echo ';';
+    {
+        $publish = "false";
+        $template = "Template1";
+        echo ';;' . $publish . ';' . $template;
+    }
 }
 
 ?>

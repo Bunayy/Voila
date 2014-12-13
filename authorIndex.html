@@ -44,7 +44,7 @@ and open the template in the editor.
                     </li>
                 </ul>
                 <ul>
-                    <li class="direct" onclick="changePW()">Passwort ändern</li>
+                    <li class="direct pwChanger">Passwort ändern</li>
                 </ul>
                 <ul>
                     <li class="direct" onclick="logout()">Benutzer abmelden</li>
@@ -52,7 +52,17 @@ and open the template in the editor.
             </nav>
 
             <div id="content_div">
-                
+                <div class="hide invisible" id="pwDivInvisible">
+                    <fieldset class="hide">
+                        <legend id="legend" class="hide">Passwort ändern: </legend>
+                        <form id="pwFormInvisible" class="hide">
+                            <p class="hide" id="pwInfo"></p>
+                            <p class="hide"><label class="hide field" for="pwOldInvisible">Altes Passwort:</label><input type="password" name="pwOldInvisible" class="hide forms" id="pwOldInvisible"></p>                   
+                            <p class="hide"><label class="hide field" for="pwNewInvisible">Neues Passwort:</label><input type="password" name="pwNewInvisible" class="hide forms" id="pwNewInvisible"></p>
+                            <input id="pwSubmitInvisible" type="submit" value="Ändern" class="hide">
+                        </form>
+                    </fieldset>
+                </div>
             </div>
 
             <footer></footer>

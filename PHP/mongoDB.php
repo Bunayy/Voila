@@ -213,9 +213,64 @@ class DBManager
         return $photoArray;
     }
     
+    function setPublicity($user, $album, $public, $template)
+    {
+        $newAlbum = DBManager::$albums->findAndModify(
+                    array('title' => $album, 'username' => $user),
+                    array('$set' => array('publish' => $public, "template" => $template)),
+                    array(),
+                    array('new' => true)
+                );
+        
+        if($newAlbum['publish'] == $public && $newAlbum['template'] == $template)
+            return "true";
+        else
+            return "false";
+    }
+    
+    function editPassword($user, $oldPW, $newPW)
+    {
+        if (DBManager::$users->findOne(array('username' => $user, 'password' => $oldPW)) == null)
+            return "missmatch";
+
+        $userInfos = DBManager::$users->findAndModify(
+                    array('password' => $oldPW, 'username' => $user),
+                    array('$set' => array('password' => $newPW)),
+                    array(),
+                    array('new' => true)
+                );
+        
+        if($userInfos['password'] == $newPW)
+            return "true";
+        else
+            return "false";
+    }
+            
     function deleteUser($data)
     {
         DBManager::$users->remove(array('username' => $data), array("justOne" => true));
+    }
+    
+    function deleteAlbum($user, $album)
+    {
+        DBManager::$albums->remove(array('username' => $user, 'title' => $album), array("justOne" => true));
+        DBManager::$gridFS->remove(array('username' => $user, 'album' => $album));
+        
+        $albumList = $this->getAlbumListOfOneAuthor($user);
+        $newAlbumList = [];
+        
+        for ($index = 0; $index < count($albumList); $index++)
+        {
+            if($albumList[$index] != $album)
+                array_push($newAlbumList, $albumList[$index]);
+        }
+        
+        $albumList = DBManager::$users->findAndModify(
+                    array('username' => $user),
+                    array('$set' => array('albums' => $newAlbumList)),
+                    array(),
+                    array('new' => true)
+                );
     }
 }
 ?>

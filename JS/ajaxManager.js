@@ -35,6 +35,10 @@ AjaxManager.prototype.receiveIdentity = function()
             edit.removeChild(edit.firstChild);
             del.removeChild(del.firstChild);
         }
+        while(contentDiv.hasChildNodes())
+        {
+            contentDiv.removeChild(contentDiv.firstChild);
+        }
         
         for(i = 0; i < albumTitles.length - 1; i++)
         {
@@ -137,7 +141,7 @@ AjaxManager.prototype.getCreatedAlbum = function ()
     if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
     {
         var msg = "Sie haben bereits ein Album mit diesem Namen!";
-        $("albumSubmit").value = "Bestätigen";
+        $("albumSubmit").value = "Ändern";
         
         if(this.xmlhttp.responseText == msg)
         {
@@ -179,6 +183,16 @@ AjaxManager.prototype.receiveAlbumInfos = function ()
         var msg = this.xmlhttp.responseText.split(";");
         $("albumTitle").value = msg[0];
         $("albumText").value = msg[1];
+        
+        if(msg[2] != "false")
+            $("publishInput").checked = true;
+        else
+            $("publishInput").checked = false;
+        
+        if(msg[3] != "Template2")
+            $("templateChoice").selectedIndex = 0;
+        else
+            $("templateChoice").selectedIndex = 1;
 
         if(msg[0] != "")
             this.getPhotos();
@@ -231,7 +245,7 @@ AjaxManager.prototype.receivePhotoResponse = function ()
     if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
     {
         var msg = this.xmlhttp.responseText;
-        submitButton.innerHTML = "Bestätigen";
+        submitButton.innerHTML = "Upload";
         
         if(msg == "1")
         {
@@ -308,8 +322,103 @@ AjaxManager.prototype.receivePhotoEditAnswer = function ()
 {
     if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
     {
+        submitButton = $("fileSubmitInvisible");
+        submitButton.innerHTML = "Ändern";
+        
         $("legend").innerHTML = $("fotoTitleInvisible").value;
         $("fotoTextInvisible").value = this.xmlhttp.responseText;
         this.getPhotos();
+    }
+}
+
+AjaxManager.prototype.setPublish = function (publish, template)
+{
+    var scope = this;
+    
+    this.xmlhttp.open("GET", "/Voila/PHP/editorHandler.php?request=publish&publish="
+            + publish + "&template=" + template, true);
+      
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.receivePublishAnswer();
+    };
+    
+    this.xmlhttp.send();
+}
+
+AjaxManager.prototype.receivePublishAnswer = function ()
+{
+    if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
+    {
+        submitButton = $("publishSubmit");
+        submitButton.innerHTML = "Ändern";
+    
+        if(this.xmlhttp.responseText == "false")
+            alert("Es ist ein Fehler beim ändern der Einstellungen aufgetreten");
+    }
+}
+
+AjaxManager.prototype.editPW = function (formdata)
+{
+    var scope = this;
+    
+    this.xmlhttp.open("POST", "/Voila/PHP/authorDBManager.php", true);
+      
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.receivePWAnswer();
+    };
+    
+    this.xmlhttp.send(formdata);
+}
+
+AjaxManager.prototype.receivePWAnswer = function ()
+{
+    if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
+    {
+        var infoBox = $("pwInfo");
+        
+        if(this.xmlhttp.responseText == "true")
+        {
+            infoBox.innerHTML = "Das Passwort wurde erfolgreich geändert!";
+        }
+            
+        else if(this.xmlhttp.responseText == "false")
+        {
+            infoBox.innerHTML = "Es ist ein Fehler aufgetreten. Das Passwort konnte nicht geändert werden!";
+        }
+        
+        else if(this.xmlhttp.responseText == "missmatch")
+        {
+            infoBox.innerHTML = "Ihre Eingabe des alten Passworts war nicht korrekt!";
+        }
+        
+        $("pwOldInvisible").value = "";
+        $("pwNewInvisible").value = "";
+        $("pwSubmitInvisible").value = "Ändern";
+    }
+}
+
+AjaxManager.prototype.deleteAlbum = function (albumName)
+{
+    var scope = this;
+    
+    this.xmlhttp.open("GET", "/Voila/PHP/authorDBManager.php?request=delete&album="
+            + albumName, true);
+      
+    this.xmlhttp.onreadystatechange = function()
+    {
+       scope.receiveDeleteAnswer();
+    };
+    
+    this.xmlhttp.send();
+}
+
+AjaxManager.prototype.receiveDeleteAnswer = function ()
+{
+    if(this.xmlhttp.readyState == 4 && this.xmlhttp.status == 200)
+    {
+        this.identify();
+        alert("Das Album wurde entfernt");
     }
 }
